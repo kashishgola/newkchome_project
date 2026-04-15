@@ -84,7 +84,8 @@ export default function BlogPage() {
                 </p>
 
                 <Link
-                  href={`/blog/${blog.slug}`} // ✅ slug URL
+                  // href={`/blog/${blog.slug}`} // ✅ slug URL
+                  href={blog.slug}// ✅ slug URL
                   className="mt-4 inline-flex text-sm font-medium hover:text-orange-500"
                 >
                   Continue reading →
