@@ -162,7 +162,39 @@ const blogPosts = [
   }
 ]
 
-export default function Blog() {
+
+type ContentSection =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; text: string }
+  | { type: "list"; items: string[] }
+  | {
+      type: "table";
+      headers: string[];
+      rows: string[][];
+    };
+
+type FAQ = {
+  question: string;
+  answer: string;
+};
+
+type BlogPost = {
+  id: number | string;
+  img: string;
+  title: string;
+  category: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+  content: ContentSection[];
+  faqs?: FAQ[];
+};
+
+type BlogProps = {
+  blogPosts: BlogPost[];
+};
+
+const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
   return (
     <div className="bg-gray-50 min-h-screen py-12 px-4 md:px-10">
       <div className="max-w-5xl mx-auto space-y-12">
@@ -255,7 +287,10 @@ export default function Blog() {
                           </thead>
                           <tbody>
                             {section.rows.map((row, i) => (
-                              <tr key={i} className="border-t hover:bg-gray-50">
+                              <tr
+                                key={i}
+                                className="border-t hover:bg-gray-50"
+                              >
                                 {row.map((cell, j) => (
                                   <td key={j} className="px-4 py-3">
                                     {cell}
@@ -299,4 +334,6 @@ export default function Blog() {
       </div>
     </div>
   );
-}
+};
+
+export default Blog;
