@@ -75,7 +75,7 @@ export default function BlogPage() {
                   <span>{blog.readTime}</span>
                 </div>
 
-                <h3 className="font-semibold text-lg mt-2 line-clamp-2">
+                <h3 className="font-semibold text-lg mt-2 line-clamp-2 text-black">
                   {blog.title}
                 </h3>
 
