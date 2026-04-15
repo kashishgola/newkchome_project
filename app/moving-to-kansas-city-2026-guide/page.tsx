@@ -143,15 +143,14 @@ const blogPosts = [
 ];
 
 
-
 type ContentSection =
   | { type: "paragraph"; text: string }
   | { type: "heading"; text: string }
-  | { type: "list"; items: string[] }
+  | { type: "list"; items?: string[] }
   | {
       type: "table";
-      headers: string[];
-      rows: string[][];
+      headers?: string[];
+      rows?: string[][];
     };
 
 type FAQ = {
@@ -167,19 +166,19 @@ type BlogPost = {
   date: string;
   readTime: string;
   excerpt: string;
-  content: ContentSection[];
+  content?: ContentSection[];
   faqs?: FAQ[];
 };
 
 type BlogProps = {
-  blogPosts: BlogPost[];
+  blogPosts?: BlogPost[];
 };
 
 const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
   return (
     <div className="bg-gray-50 min-h-screen py-12 px-4 md:px-10">
       <div className="max-w-5xl mx-auto space-y-12">
-        {blogPosts.map((post) => (
+        {(blogPosts || []).map((post) => (
           <article
             key={post.id}
             className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden"
@@ -217,7 +216,7 @@ const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
 
               {/* Dynamic Content */}
               <div className="space-y-5 text-gray-700">
-                {post.content.map((section, index) => {
+                {post.content?.map?.((section, index) => {
                   if (section.type === "paragraph") {
                     return (
                       <p key={index} className="leading-relaxed">
@@ -243,7 +242,7 @@ const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
                         key={index}
                         className="list-disc list-inside space-y-2"
                       >
-                        {section.items.map((item, i) => (
+                        {section.items?.map?.((item, i) => (
                           <li key={i}>{item}</li>
                         ))}
                       </ul>
@@ -259,7 +258,7 @@ const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
                         <table className="min-w-full text-sm text-left">
                           <thead className="bg-gray-100 text-gray-700">
                             <tr>
-                              {section.headers.map((header, i) => (
+                              {section.headers?.map?.((header, i) => (
                                 <th key={i} className="px-4 py-3 font-semibold">
                                   {header}
                                 </th>
@@ -267,7 +266,7 @@ const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
                             </tr>
                           </thead>
                           <tbody>
-                            {section.rows.map((row, i) => (
+                            {section.rows?.map?.((row, i) => (
                               <tr
                                 key={i}
                                 className="border-t hover:bg-gray-50"
@@ -290,13 +289,13 @@ const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
               </div>
 
               {/* FAQ Section */}
-              {post.faqs && (
+              {post.faqs?.length > 0 && (
                 <div className="mt-10">
                   <h3 className="text-xl font-semibold mb-4 text-gray-800">
                     FAQs
                   </h3>
                   <div className="space-y-4">
-                    {post.faqs.map((faq, i) => (
+                    {post.faqs?.map?.((faq, i) => (
                       <div key={i} className="bg-gray-50 border rounded-lg p-4">
                         <p className="font-medium text-gray-800">
                           {faq.question}
@@ -318,4 +317,3 @@ const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
 };
 
 export default Blog;
-
