@@ -289,25 +289,22 @@ const Blog: React.FC<BlogProps> = ({ blogPosts }) => {
               </div>
 
               {/* FAQ Section */}
-              {post.faqs?.length > 0 && (
-                <div className="mt-10">
-                  <h3 className="text-xl font-semibold mb-4 text-gray-800">
-                    FAQs
-                  </h3>
-                  <div className="space-y-4">
-                    {post.faqs?.map?.((faq, i) => (
-                      <div key={i} className="bg-gray-50 border rounded-lg p-4">
-                        <p className="font-medium text-gray-800">
-                          {faq.question}
-                        </p>
-                        <p className="text-gray-600 mt-1 text-sm">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+             {/* FAQ Section */}
+{Array.isArray(post.faqs) && post.faqs.length > 0 && (
+  <div className="mt-10">
+    <h3 className="text-xl font-semibold mb-4 text-gray-800">
+      FAQs
+    </h3>
+    <div className="space-y-4">
+      {post.faqs.map((faq, i) => (
+        <div key={i} className="bg-gray-50 border rounded-lg p-4">
+          <p className="font-medium text-gray-800">{faq.question}</p>
+          <p className="text-gray-600 mt-1 text-sm">{faq.answer}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
             </div>
           </article>
         ))}
